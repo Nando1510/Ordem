@@ -27,9 +27,8 @@ app.use(session({
 }));
 
 // CONEXÃO AO MONGODB
-mongoose.connect('mongodb://localhost:27017/Ordem')
-  .then(() => console.log('MongoDB conectado com sucesso!'))
-  .catch(err => console.error('Erro na conexão com MongoDB:', err));
+// CONECTA O SERVIDOR NODE.JS AO BANCO DE DADOS MONGODB
+const mongoURI = process.env.MONGO_URI || 'mongodb+srv://nandohanauer01_db_user:HH13TKCw03DJoLCz@cluster0.fbgabq9.mongodb.net/Ordem?retryWrites=true&w=majority';
 
 // FUNÇÃO UTILITÁRIA PARA GERAR CUSTOM ID INCREMENTAL
 async function gerarCustomId(Model) {

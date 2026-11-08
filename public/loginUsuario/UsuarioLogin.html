@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Encontre Esperança</title>
+  <!-- Ajustado para carregar da mesma pasta -->
   <link rel="stylesheet" href="UsuarioLogin.css">
 </head>
 <body>
@@ -12,19 +13,20 @@
       <h1>Bem-vindo</h1>
       <p>Login do Usuário</p>
       <form id="form-login">
-              <label for="usuario">Usuário:</label>
-              <input type="text" id="nome" name="nome" required>
+            <label for="usuario">Usuário:</label>
+            <input type="text" id="nome" name="nome" required>
 
-              <label for="senha">Senha:</label>
-              <input type="password" id="senha" name="senha" required>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
 
-              <button type="submit">Entrar</button>
-              <br>
-              <br>
-              <button onclick="window.location.href='/inicio/logado.html'">Voltar</button>
+            <button type="submit">Entrar</button>
+            <br>
+            <br>
+            <button type="button" onclick="window.location.href='/inicio/logado.html'">Voltar</button>
         </form>
     </div>
   </div>
+  <!-- Ajustado para carregar da mesma pasta -->
   <script src="UsuarioLogin.js"></script>
 </body>
 </html>

@@ -20,10 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // ROTA RAIZ (Página Inicial para evitar o erro Cannot GET /)
+// Rota para a página inicial (ajustada para o seu arquivo de login)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html')); 
-  // Nota: Se a sua página principal estiver em outro caminho dentro de 'public', 
-  // ajuste o caminho acima (por exemplo: 'public', 'login.html', etc.)
+  res.sendFile(path.join(__dirname, 'public', 'loginUsuario', 'UsuarioLogin.html'));
 });
 
 // CONFIGURAÇÃO DA SESSÃO

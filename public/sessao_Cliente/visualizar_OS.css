@@ -1,0 +1,136 @@
+/* visualizar_OS.css */
+
+/* Estilo geral da página */
+body {
+    background-color: #f4f6f9 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Cartão principal da Ordem de Serviço */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Tabela de Informações Técnicas */
+.table {
+    border-color: #dee2e6;
+    vertical-align: middle;
+}
+
+.table td, .table th {
+    padding: 8px 12px;
+}
+
+/* Campos de entrada embutidos na tabela (efeito limpo) */
+.table input.form-control-sm {
+    box-shadow: none !important;
+    outline: none !important;
+    background-color: transparent;
+    font-size: 14px;
+}
+
+.table input.form-control-sm:focus {
+    background-color: #ffffff;
+    border: 1px solid #0d6efd !important;
+    border-radius: 4px;
+    padding: 2px 6px !important;
+}
+
+/* Caixas de Texto (Defeito e Laudo) */
+textarea.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 14px;
+    background-color: #fafafa;
+}
+
+textarea.form-control:focus {
+    background-color: #ffffff;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* Seleção de Situação */
+#situacao {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Destaque para os Valores Finais */
+#valorTotal {
+    background-color: transparent;
+    border: 1px solid transparent;
+    font-size: 1.25rem;
+    padding: 0 8px;
+}
+
+#valorTotal:focus {
+    background-color: #ffffff;
+    border-color: #0d6efd;
+}
+
+/* Botões */
+.btn-success {
+    background-color: #198754;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+}
+
+.btn-secondary {
+    font-weight: 500;
+}
+
+/* Otimização para Impressão (caso use Ctrl + P) */
+@media print {
+    body {
+        background-color: #fff !important;
+    }
+    .btn, .d-flex.justify-content-between {
+        display: none !important; /* Esconde botões de voltar e salvar */
+    }
+    .card {
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    input, textarea, select {
+        border: none !important;
+        background: transparent !important;
+        appearance: none;
+    }
+}
+
+/* Estilo aplicado automaticamente apenas na hora de gerar o PDF */
+.modo-impressao-pdf {
+    font-size: 16px !important; /* Aumenta a base das letras */
+}
+
+.modo-impressao-pdf table {
+    font-size: 15px !important;
+}
+
+.modo-impressao-pdf input, 
+.modo-impressao-pdf textarea, 
+.modo-impressao-pdf select {
+    font-size: 15px !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.modo-impressao-pdf .btn {
+    display: none !important; /* Esconde os botões no PDF */
+}
+
+.modo-impressao-pdf {
+    margin: 0 !important;
+    padding: 0 !important;
+    top: 0 !important;
+    position: relative !important;
+}

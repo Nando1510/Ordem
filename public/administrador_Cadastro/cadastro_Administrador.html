@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&amp;display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/records.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    
+    <script src="cadastro_Administrador.js" defer></script>
+    <title>Administradores Cadastrados</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            padding-bottom: 60px; /* espaço para o rodapé fixo */
+            font-family: 'Karla', sans-serif;
+        }
+
+        .navbar-text {
+           color: white !important;
+           font-weight: bold;
+        }
+
+        .box-search {
+            display: flex;
+            justify-content: center;
+            gap: 0.1%;
+            margin-bottom: 20px;
+        }
+
+        table.records {
+            width: 85%;
+            margin: 0 auto 40px auto;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        table.records thead {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        table.records th,
+        table.records td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+            color: white;
+        }
+
+        table.records th {
+            font-weight: bold;
+        }
+
+        .icon {
+            cursor: pointer;
+            font-size: 18px;
+            user-select: none;
+        }
+
+        /* Muda cursor para mãozinha ao passar nos ícones */
+        .icon:hover {
+            cursor: pointer;
+            color: #0d6efd; /* cor azul bootstrap no hover */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgb(17, 54, 71);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            font-family: 'Karla', sans-serif;
+        }
+
+        /* Ajusta o botão cadastrar administrador para ter margem abaixo */
+        #cadastrarAdministrador {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="cadastro-administrador">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Rocha Solidez - Ordens de Serviços  🧰</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="d-flex">
+            <a href="" class="btn btn-danger me-5" onclick="return confirmaSaida()">Sair</a>
+        </div>
+    </nav>
+    <br />
+    <br />
+
+    <header>
+        <h1 class="header-title">Cadastro de Administradores</h1>
+    </header>
+    <br>
+    <div class="box-search">
+        <input type="search" class="form-control w-25" placeholder="Pesquisar" id="pesquisar">
+        <button onclick="pesquisando_Dados()" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+    </div>
+
+    <main>
+        <button type="button" class="button blue mobile" id="cadastrarAdministrador">Cadastrar Administrador</button>
+
+        <table class="records">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Senha</th>
+                    <th>Celular</th>
+                    <th>Data do cadastro</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela"></tbody>
+        </table>
+
+        <div class="meu-modal" id="modal">
+            <div class="meu-modal-content">
+                <header class="meu-modal-header">
+                    <h2>Novo Administrador</h2>
+                    <span class="modal-close" id="modalClose" onclick="fechar_Modal()">✖</span>
+                </header>
+                <form class="modal-form" id="formulario_Modal">
+                    <input class="modal-field" id="nome" type="text" placeholder="Digite seu  login" />
+                    <input class="modal-field" id="senha" type="password" placeholder="Digite sua senha" />
+                    <input class="modal-field" id="confirmar_Senha" type="password" placeholder="Confirme sua senha" />
+                    <input class="modal-field" id="celular" type="number" placeholder="celular" />
+                </form>
+                <footer class="modal-footer">
+                    <button class="button green" id="salvar">Salvar</button>
+                    <button type="submit" class="button blue" id="cancelar">Cancelar</button>
+                </footer>
+            </div>
+        </div>
+
+        <script>
+            async function carregarDados() {
+                try {
+                    const resposta = await fetch('/registros_Administrador');
+                    const dados = await resposta.json();
+                    const corpo = document.getElementById('corpo-tabela');
+                    corpo.innerHTML = '';
+
+                    dados.forEach(item => {
+                        const tr = document.createElement('tr');
+                        const criadoEm = new Date(item.createdAt).toLocaleString('pt-BR');
+                        tr.innerHTML = `
+                            <td>${item.customId}</td>
+                            <td>${item.nome}</td>
+                            <td>${item.senha}</td>
+                            <td>${item.celular}</td>
+                            <td>${criadoEm}</td>
+                            <td>
+                                <span class="icon" onclick="iniciarEdicao(this, ${item.customId})" title="Editar">✏️</span>
+                                <span class="icon" onclick="excluirRegistro(${item.customId})" title="Excluir">🗑️</span>
+                            </td>
+                        `;
+                        corpo.appendChild(tr);
+                    });
+                } catch (err) {
+                    console.error('Erro ao carregar dados:', err);
+                }
+            }
+
+            function iniciarEdicao(el, id) {
+                const tr = el.closest('tr');
+                const cells = tr.querySelectorAll('td');
+                ['nome', 'senha', 'celular'].forEach((field, idx) => {
+                    const td = cells[idx + 1];
+                    const valor = td.textContent;
+                    td.innerHTML = `<input class="edit-field" id="edit-${field}-${id}" value="${valor}">`;
+                });
+                el.textContent = '💾';
+                el.onclick = () => salvarEdicao(id);
+            }
+
+            async function salvarEdicao(id) {
+                const nome = document.getElementById(`edit-nome-${id}`).value.trim();
+                const senha = document.getElementById(`edit-senha-${id}`).value.trim();
+                const celular = document.getElementById(`edit-celular-${id}`).value.trim();
+
+                const res = await fetch(`/atualizar_Administrador/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome, senha, celular })
+                });
+
+                if (res.ok) carregarDados();
+                else alert('Erro ao salvar edição');
+            }
+
+            async function excluirRegistro(id) {
+                if (!confirm('Deseja realmente excluir este registro?')) return;
+                const res = await fetch(`/excluir_Administrador/${id}`, { method: 'DELETE' });
+                if (res.ok) carregarDados();
+                else alert('Erro ao excluir registro');
+            }
+
+            carregarDados();
+
+            function confirmaSaida() {
+                return confirm('Tem certeza que deseja sair?');
+            }
+
+            function pesquisando_Dados() {
+                const filtro = document.getElementById('pesquisar').value.toLowerCase();
+                const linhas = document.querySelectorAll('#corpo-tabela tr');
+
+                const linhaMensagem = document.getElementById('linha-vazia');
+                if (linhaMensagem) linhaMensagem.remove();
+
+                let encontrou = false;
+
+                linhas.forEach(tr => {
+                    const nome = tr.cells[1].textContent.toLowerCase();
+                    const senha = tr.cells[2].textContent.toLowerCase();
+                    const celular = tr.cells[3].textContent.toLowerCase();
+                    const criadoEm = tr.cells[4].textContent.toLowerCase();
+
+                    const corresponde =
+                        nome.includes(filtro) ||
+                        senha.includes(filtro) ||
+                        celular.includes(filtro) ||
+                        criadoEm.includes(filtro);
+
+                    tr.style.display = corresponde ? '' : 'none';
+                    if (corresponde) encontrou = true;
+                });
+
+                if (!encontrou) {
+                    const tbody = document.getElementById('corpo-tabela');
+                    const tr = document.createElement('tr');
+                    tr.id = 'linha-vazia';
+                    tr.classList.add('mensagem-vazia');
+                    tr.innerHTML = `<td colspan="6">Nenhum registro encontrado.</td>`;
+                    tbody.appendChild(tr);
+                }
+            }
+
+            document.getElementById('pesquisar').addEventListener('keydown', e => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    pesquisando_Dados();
+                }
+            });
+        </script>
+    </main>
+
+    <footer>
+        Copyright © Geison Rocha - ROCHA SOLIDEZ - ORDENS DE SERVIÇOS  🧰
+    </footer>
+</body>
+</html>

@@ -1,0 +1,170 @@
+/* --- Estilos Globais e Layout --- */
+:root {
+    --bg-gradient-start: rgb(20, 147, 220);
+    --bg-gradient-end: rgb(17, 54, 71);
+    --footer-bg: rgb(17, 54, 71);
+    --primary-blue: #0d6efd;
+    --primary-blue-hover: #0b5ed7;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    color: #ffffff;
+    font-family: 'Karla', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.navbar-text {
+    color: #ffffff !important;
+}
+
+/* --- Caixas de Pesquisa e Layouts Flexíveis --- */
+.box-search {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- Tabelas Customizadas --- */
+table.records {
+    width: 85%;
+    margin: 0 auto 40px auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+table.records thead {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+table.records th,
+table.records td {
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: #ffffff;
+}
+
+table.records th {
+    font-weight: 700;
+}
+
+/* Links e Interatividade nas Tabelas */
+.cliente-link {
+    cursor: pointer;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.cliente-link:hover {
+    color: #38bdf8;
+    text-decoration: underline;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+    margin: 0 4px;
+    transition: color 0.2s ease;
+}
+
+.icon:hover {
+    color: #38bdf8;
+}
+
+/* --- Botões Customizados --- */
+.button.blue {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.button.blue:hover {
+    background-color: var(--primary-blue-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+}
+
+.button.blue:active {
+    transform: translateY(0);
+}
+
+#gerar_OS {
+    display: block;
+    margin-left: 7.5%;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+/* --- Rodapé --- */
+footer {
+    background-color: var(--footer-bg);
+    color: #ffffff;
+    padding: 12px 0;
+    font-weight: 600;
+    font-family: 'Karla', sans-serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Estilo Display Eletrônico (Painel de LED) --- */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+.painel-eletronico-container {
+    background-color: #0d1117;
+    border: 2px solid #1f293d;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.painel-eletronico-cifra {
+    background-color: transparent !important;
+    color: #00ff66 !important;
+    font-family: 'Share Tech Mono', monospace, sans-serif;
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+}
+
+.display-eletronico {
+    background-color: transparent !important;
+    color: #00ff66 !important;
+    font-family: 'Share Tech Mono', monospace, sans-serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.7);
+}
+
+.display-eletronico:focus {
+    box-shadow: none !important;
+}
+
+.container-oculto {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 800px;
+    background: #ffffff !important; /* Força o fundo branco para o PDF */
+    color: #000000 !important;      /* Garante que o texto padrão seja legível */
+    font-family: 'Karla', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Garante que tabelas ou textos dentro do PDF não fiquem transparentes */
+.container-oculto * {
+    color: inherit;
+}

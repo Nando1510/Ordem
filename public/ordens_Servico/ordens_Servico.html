@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&amp;display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/records.css" />
+    <link rel="stylesheet" href="ordens_Servico.css" />
+
+    <script src="ordens_Servico.js" defer></script>
+    <title>Ordens de Serviço - Clientes</title>
+</head>
+<body class="cadastro-cliente">
+     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Rocha Solidez - Ordens de Serviços 🧰</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="d-flex">
+            <a href="" class="btn btn-danger me-5" onclick="return confirmaSaida()">Sair</a>
+        </div>
+    </nav>
+    <br />
+    <br />
+
+    <header>
+        <h1 class="header-title">Ordens de Serviço</h1>
+    </header>
+    <br>
+    
+    <div class="box-search">
+        <input type="search" class="form-control w-25" placeholder="Pesquisar" id="pesquisar">
+        <button onclick="pesquisando_Dados()" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+    </div>
+
+    <main>
+        <button type="button" class="button blue mobile" id="gerar_OS">Gerar Ordem de Serviço</button>
+
+        <table class="records">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>Celular</th>
+                    <th>Data do cadastro</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela"></tbody>
+        </table>
+    </main>
+
+    <footer>
+        Copyright © Geison Rocha - ROCHA SOLIDEZ - ORDENS DE SERVIÇOS 🧰
+    </footer>
+</body>
+</html>

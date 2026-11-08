@@ -1,0 +1,67 @@
+/* Estilo específico para a tela de cadastro de administrador -  */
+body.cadastro-administrador {
+  margin: 0;
+  padding: 0;
+  background: url('../imagens/familia-admin.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54 , 71));
+}
+
+.cadastro-container {
+  background: rgba(0, 0, 0, 0.6);
+  margin: 60px auto;
+  padding: 40px;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.cadastro-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.cadastro-container label {
+  display: block;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.cadastro-container input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 5px;
+}
+
+.cadastro-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 25px;
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cadastro-container button:hover {
+  background-color: #218838;
+}
+
+
+.mensagem-vazia td {
+    text-align: center;
+    color: #ccc;
+    font-style: italic;
+}
+
+
+

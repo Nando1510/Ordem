@@ -1,0 +1,136 @@
+/* login.css */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.fundo {
+  background-image: url('https://images.unsplash.com/photo-1700427296131-0cc4c4610fc6?q=80&w=876&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Caixa de Login */
+.login-container {
+  background: rgba(18, 52, 66, 0.58);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+
+  padding: 35px;
+  width: 320px;
+  text-align: center;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+  color: rgba(255, 255, 255, 0.85);
+  ;
+}
+
+/* Título */
+.login-container h1 {
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Texto */
+.login-container p {
+  margin-bottom: 20px;
+  color: #f5f5f5;
+  font-weight: bold;
+  font-size: 1.2rem;
+  font-family: "Arial Black", Impact, sans-serif;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Campos de Login */
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  box-sizing: border-box;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+  font-size: 15px;
+
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Placeholder */
+.login-container input::placeholder {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Campo em foco */
+.login-container input:focus {
+  border-color: #4dd0e1;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 12px rgba(77, 208, 225, 0.5);
+}
+
+/* Botão Entrar */
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #009688, #1976d2);
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover do botão */
+.login-container button:hover {
+  background: linear-gradient(135deg, #00bfa5, #2196f3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Área dos botões */
+.botoes {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Correção: faltava o ponto antes de .botoes */
+.botoes button {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.botoes button:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&amp;display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/records.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    
+    <script src="cadastro_Cliente.js" defer></script>
+    <title>Clientes Cadastrados</title>
+</head>
+<body class="cadastro-cliente">
+     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Rocha Solidez - Ordens de Serviços 🧰</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="d-flex">
+            <a href="" class="btn btn-danger me-5" onclick="return confirmaSaida()">Sair</a>
+        </div>
+    </nav>
+    <br />
+    <br />
+
+    <header>
+        <h1 class="header-title">Cadastro de Clientes</h1>
+    </header>
+    <br>
+    
+    <div class="box-search">
+        <input type="search" class="form-control w-25" placeholder="Pesquisar" id="pesquisar">
+        <button onclick="pesquisando_Dados()" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+    </div>
+
+    <main>
+        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar Cliente</button>
+
+        <table class="records">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>Celular</th>
+                    <th>Data do cadastro</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela"></tbody>
+        </table>
+
+        <!-- Modal de Cadastro / Edição Completa estilo Tech System -->
+        <div class="meu-modal" id="modal">
+            <div class="meu-modal-content">
+                <header class="meu-modal-header">
+                    <div class="header-tech-title">
+                        <span class="tech-icon">⚡</span>
+                        <h2 id="modal-titulo"></h2>
+                    </div>
+                    <span class="modal-close" id="modalClose" onclick="fecharModal()">✖</span>
+                </header>
+                
+                <form class="modal-form" id="formulario_Modal">
+                    <input type="hidden" id="cliente-id" value="" />
+
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input class="modal-field" id="nome" type="text" placeholder="Digite o nome completo" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpf_cnpj">CPF/CNPJ</label>
+                        <input class="modal-field" id="cpf_cnpj" maxlength="11" required type="text" placeholder="Digite o CPF ou CNPJ" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input class="modal-field" id="telefone" type="text" placeholder="Telefone fixo" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="celular">Celular</label>
+                        <input class="modal-field" id="celular" type="text" placeholder="Celular" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="modal-field" id="email" type="email" placeholder="E-mail de contato" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rua">Rua</label>
+                        <input class="modal-field" id="rua" type="text" placeholder="Nome da rua" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numero">Número</label>
+                        <input class="modal-field" id="numero" type="text" placeholder="Número" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bairro">Bairro</label>
+                        <input class="modal-field" id="bairro" type="text" placeholder="Bairro" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cidade">Cidade</label>
+                        <input class="modal-field" id="cidade" type="text" placeholder="Cidade" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select class="modal-field" id="estado">
+                            <option value="">Selecione o Estado...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cep">CEP</label>
+                        <input class="modal-field" id="cep" type="text" placeholder="00000-000" />
+                    </div>
+                </form>
+                
+                <footer class="modal-footer">
+                    <button class="button green" id="salvar" onclick="salvarDados(event)">+ Adicionar</button>
+                    <button type="button" class="button blue" id="cancelar" onclick="fecharModal()">⬅ Voltar</button>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Copyright © Geison Rocha - ROCHA SOLIDEZ - ORDENS DE SERVIÇOS 🧰
+    </footer>
+    <script>
+        
+    // CÓDIGO QUE REMOVE LETRAS DO CAMPO CPF
+    const cpf = document.getElementById('cpf_cnpj');
+    if (cpf) {
+        cpf.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '');
+        });
+    }
+    
+    // Removidas as funções duplicadas antigas (carregarDados, iniciarEdicao, etc) 
+    // que estavam sobrescrevendo o arquivo externo.
+</script>
+    </script>
+</body>
+</html>

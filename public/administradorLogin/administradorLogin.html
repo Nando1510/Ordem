@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Encontre Esperança</title>
+  <link rel="stylesheet" href="administradorLogin.css">
+</head>
+<body>
+  <div class="fundo">
+    <div class="login-container">
+      <h1>Bem-vindo</h1>
+      <p>Login do Usuário</p>
+      <form id="form-login">
+              <label for="nome">Administrador:</label>
+              <input type="text" id="nome" name="nome" required>
+
+              <label for="senha">Senha:</label>
+              <input type="password" id="senha" name="senha" required>
+
+              <button type="submit">Entrar</button>
+              <br>
+              <br>
+              <button onclick="window.location.href='/inicio/logado.html'">Voltar</button>
+        </form>
+    </div>
+  </div>
+  <script src="administradorLogin.js"></script>
+</body>
+</html>

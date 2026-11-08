@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="sessao_Cliente.js" defer></script>
+    <title>Sessão do Cliente</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/records.css" />
+    <link rel="stylesheet" href="ordens_Servico.css" />
+</head>
+<body class="cadastro-cliente">
+     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Rocha Solidez - Ordens de Serviços 🧰</a>
+        </div>
+        <div class="d-flex">
+            <a href="#" class="btn btn-danger me-5" id="sair">Sair</a>
+        </div>
+    </nav>
+    <br /><br />
+
+    <header>
+        <h1 class="header-title" id="titulo-cliente">Bem-vindo à sessão do Cliente: Carregando...</h1>
+    </header>
+    <br>
+
+    <main>
+        <table class="records">
+            <thead>
+                <tr>
+                    <th>Número da OS</th>
+                    <th>Data de Emissão</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela-os">
+                <!-- Preenchido via JavaScript -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        Copyright © Geison Rocha - ROCHA SOLIDEZ - ORDENS DE SERVIÇOS 🧰
+    </footer>
+
+    
+</body>
+</html>

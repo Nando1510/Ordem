@@ -1,0 +1,165 @@
+/*=========================
+   USUÁRIO NO TOPO E LAYOUT
+=========================*/
+.usuario-topo{
+    position:absolute;
+    top:20px;
+    right:35px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    z-index:9999;
+}
+
+#nome_Administrador{
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    text-shadow:2px 2px 8px rgba(0,0,0,.7);
+}
+
+.btn-sair{
+    width:140px;
+    height:40px;
+    border:none;
+    border-radius:6px;
+    background:#d62828;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-sair:hover{
+    background:#b71c1c;
+    transform:translateY(-2px);
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+
+.card, .card-finalizar {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.lineInput {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 18px;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button#salvar { background-color: #008000; color: #fff; }
+button#cancelar { background-color: #f44336; color: #fff; }
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.checkbox-container label {
+    margin-bottom: 0;
+}
+
+.btn-finalizar {
+    background-color: #28a745;
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-finalizar:hover {
+    background-color: #218838;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+thead th {
+    background: linear-gradient(to bottom, #ffffff 0%, #d9d9d9 25%, #a6a6a6 50%, #d9d9d9 75%, #f5f5f5 100%);
+    color: #000;
+    padding: 12px 10px;
+}
+
+tbody td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #ffffff;
+}
+
+#total-compras {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 23px;
+    color: #fff;
+}
+
+.action-icons {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 5px;
+}

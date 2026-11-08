@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerar Ordem de Serviço - Rocha Solidez</title>
+
+    <!-- Fontes e Bootstrap 5 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,600;0,700;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+
+    <!-- Estilos Locais -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="ordens_Servico.css" />
+
+    <!-- Biblioteca para geração de PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="Os_Cliente.js"></script>
+</head>
+<body class="cadastro-cliente d-flex flex-column min-vh-100">
+
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm mb-4">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#">
+                <span>Rocha Solidez - Ordens de Serviços</span> 🧰
+            </a>
+            
+            <div class="d-flex align-items-center gap-3">
+                <span id="usuario-boas-vindas" class="navbar-text fw-semibold d-none d-md-inline"></span>
+                <button type="button" class="btn btn-outline-light btn-sm px-3" id="sair">
+                    <i class="bi bi-box-arrow-right me-1"></i> Sair
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container my-auto">
+        <div class="card shadow-lg border-0 p-4 p-md-5 text-dark mx-auto" style="border-radius: 16px; max-width: 920px; background-color: #ffffff;">
+            <h2 class="text-primary text-center mb-4 fw-bold">Gerar Ordem de Serviço</h2>
+
+            <form id="form-os" novalidate>
+                
+                <!-- SELEÇÃO DO CLIENTE E DADOS VINCULADOS -->
+                <section class="mb-4 p-4 bg-light rounded-3 border">
+                    <label for="select-cliente" class="form-label fw-bold text-dark fs-6 mb-2">1. Selecione o Cliente (*):</label>
+                    <select id="select-cliente" class="form-select form-select-lg mb-3" aria-label="Selecione o Cliente" required>
+                        <option value="" disabled selected>Carregando clientes...</option>
+                    </select>
+
+                    <!-- Detalhes do Cliente Selecionado (CPF, Cidade e Celular) -->
+                    <div class="row g-3 text-secondary pt-2 border-top">
+                        <div class="col-md-4">
+                            <span class="fw-bold text-dark">CPF:</span> <span id="lbl-cliente-cpf">---</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fw-bold text-dark">Cidade:</span> <span id="lbl-cliente-cidade">---</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fw-bold text-dark">Celular:</span> <span id="lbl-cliente-celular">---</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BLOCO DOS DADOS DA OS -->
+                <fieldset id="container-campos-os" disabled>
+                    
+                    <!-- IDENTIFICAÇÃO DO EQUIPAMENTO -->
+                    <legend class="text-secondary border-bottom pb-2 mb-3 fs-5 fw-bold">2. Identificação do Equipamento</legend>
+                    
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="equipamento" class="form-label fw-bold">Equipamento / Aparelho (*):</label>
+                            <input type="text" id="equipamento" class="form-control" placeholder="Ex: Ar Condicionado Split, Geladeira" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="marca-modelo" class="form-label fw-bold">Marca / Modelo:</label>
+                            <input type="text" id="marca-modelo" class="form-control" placeholder="Ex: Consul 12000 BTUs" />
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="numero-serie" class="form-label fw-bold">Número de Série:</label>
+                            <input type="text" id="numero-serie" class="form-control" placeholder="Ex: SN12345678" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="patrimonio" class="form-label fw-bold">Número de Patrimônio:</label>
+                            <input type="text" id="patrimonio" class="form-control" placeholder="Ex: PAT-2026-001" />
+                        </div>
+                    </div>
+
+                    <!-- DATAS E GARANTIA -->
+                    <legend class="text-secondary border-bottom pb-2 my-3 fs-5 fw-bold">3. Datas e Condições de Garantia</legend>
+                    
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <label for="data-entrada" class="form-label fw-bold">Data de Entrada (*):</label>
+                            <input type="date" id="data-entrada" class="form-control" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="data-saida" class="form-label fw-bold">Data de Saída Prevista/Efetiva:</label>
+                            <input type="date" id="data-saida" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="tempo-garantia" class="form-label fw-bold">Garantia do Serviço:</label>
+                            <input type="text" id="tempo-garantia" class="form-control" placeholder="Ex: 90 dias" />
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="garantia-servico-anterior">
+                                <label class="form-check-label fw-bold" for="garantia-servico-anterior">
+                                    Garantia de Serviço Anterior
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="garantia-compra">
+                                <label class="form-check-label fw-bold" for="garantia-compra">
+                                    Garantia de Tempo de Compra / Fábrica
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DETALHES TÉCNICOS -->
+                    <legend class="text-secondary border-bottom pb-2 my-3 fs-5 fw-bold">4. Detalhes Técnicos</legend>
+                    
+                    <div class="mb-3">
+                        <label for="defeito" class="form-label fw-bold">Defeito / Relato do Cliente (*):</label>
+                        <textarea id="defeito" class="form-control" rows="3" placeholder="Descreva detalhadamente o problema informado..." required></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="servico-realizar" class="form-label fw-bold">Serviço a ser realizado / Observações:</label>
+                        <textarea id="servico-realizar" class="form-control" rows="2" placeholder="Procedimentos técnicos, diagnósticos ou observações internas..."></textarea>
+                    </div>
+
+                    <!-- PEÇAS UTILIZADAS -->
+                    <legend class="text-secondary border-bottom pb-2 my-3 fs-5 fw-bold">5. Peças Utilizadas (Estoque)</legend>
+
+                    <div class="row g-2 align-items-end mb-3">
+                        <div class="col-md-6">
+                            <label for="select-peca" class="form-label fw-bold">Selecionar Peça:</label>
+                            <select id="select-peca" class="form-select">
+                                <option value="">Selecione uma peça...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="qtd-peca" class="form-label fw-bold">Qtd:</label>
+                            <input type="number" id="qtd-peca" class="form-control" min="1" value="1">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" id="btn-adicionar-peca" class="btn btn-outline-primary w-100 fw-bold">
+                                <i class="bi bi-plus-lg me-1"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TABELA DINÂMICA DE PEÇAS -->
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered table-hover align-middle mb-0">
+                            <thead class="table-light text-center">
+                                <tr>
+                                    <th scope="col" class="text-start">Peça / Item</th>
+                                    <th scope="col" style="width: 100px;">Qtd</th>
+                                    <th scope="col" style="width: 130px;">Valor Unit.</th>
+                                    <th scope="col" style="width: 130px;">Subtotal</th>
+                                    <th scope="col" style="width: 70px;">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-pecas-body">
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Nenhuma peça adicionada.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- VALORES E SITUAÇÃO -->
+                    <legend class="text-secondary border-bottom pb-2 my-3 fs-5 fw-bold">6. Resumo de Valores e Situação</legend>
+
+                    <!-- LINHA: SITUAÇÃO DA OS + MÃO DE OBRA -->
+                    <div class="row g-3 mb-4 align-items-center">
+                        <div class="col-md-6">
+                            <label for="situacao" class="form-label fw-bold">Situação da OS (*):</label>
+                            <select id="situacao" class="form-select" required>
+                                <option value="Em andamento" selected>Em andamento</option>
+                                <option value="Aguardando peça">Aguardando peça</option>
+                                <option value="Aprovado">Aprovado</option>
+                                <option value="Concluído">Concluído</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="valor-mao-obra" class="form-label fw-bold">Valor Mão de Obra (R$):</label>
+                            <input type="number" step="0.01" min="0" id="valor-mao-obra" class="form-control text-end" placeholder="0.00" value="0.00" />
+                        </div>
+                    </div>
+
+                    <!-- LINHA: VALOR TOTAL CALCULADO -->
+                    <div class="row g-3 mb-4 justify-content-center">
+                        <div class="col-md-8 col-lg-6 text-center">
+                            <label for="valor-total" class="form-label fw-bold fs-6 text-uppercase tracking-wider text-secondary">Valor Total Calculado</label>
+                            <div class="painel-eletronico-container p-2 rounded-3">
+                                <div class="input-group">
+                                    <span class="input-group-text painel-eletronico-cifra border-0 fw-bold fs-3">R$</span>
+                                    <input type="number" step="0.01" id="valor-total" class="form-control display-eletronico text-end border-0" placeholder="0.00" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AÇÕES E BOTÕES -->
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-4 pt-3 border-top">
+                        <button type="button" class="btn btn-outline-secondary" id="cancelar">
+                            Limpar / Cancelar
+                        </button>
+
+                        <div class="d-flex gap-2">
+                            
+                            <button type="submit" class="btn btn-primary px-4 fw-bold">
+                                Salvar e Gerar OS
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- CONTAINER OCULTO EXCLUSIVO PARA A GERAÇÃO DO PDF -->
+    <div id="pdf-container-oculto" style="display: none; width: 800px; background: #ffffff; padding: 20px; font-family: Arial, sans-serif; color: #333; font-size: 12px;">
+        <div style="text-align: center; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px;">
+            <h2 style="margin: 0;">ROCHA SOLIDEZ</h2>
+            <h4 style="margin: 5px 0 0 0;">ORÇAMENTO / ORDEM DE SERVIÇO</h4>
+        </div>
+        
+        <table style="width: 100%; margin-bottom: 15px; border-collapse: collapse;">
+            <tr>
+                <td style="padding: 4px;"><strong>Cliente:</strong> <span id="pdf-cliente"></span></td>
+                <td style="padding: 4px;"><strong>CPF:</strong> <span id="pdf-cpf"></span></td>
+            </tr>
+            <tr>
+                <td style="padding: 4px;"><strong>Cidade:</strong> <span id="pdf-cidade"></span></td>
+                <td style="padding: 4px;"><strong>Celular:</strong> <span id="pdf-celular"></span></td>
+            </tr>
+            <tr>
+                <td style="padding: 4px;"><strong>Equipamento:</strong> <span id="pdf-equipamento"></span></td>
+                <td style="padding: 4px;"><strong>Marca/Modelo:</strong> <span id="pdf-marca"></span></td>
+            </tr>
+            <tr>
+                <td style="padding: 4px;"><strong>Nº Série:</strong> <span id="pdf-serie"></span></td>
+                <td style="padding: 4px;"><strong>Patrimônio:</strong> <span id="pdf-patrimonio"></span></td>
+            </tr>
+            <tr>
+                <td style="padding: 4px;"><strong>Data Entrada:</strong> <span id="pdf-data-entrada"></span></td>
+                <td style="padding: 4px;"><strong>Previsão Saída:</strong> <span id="pdf-data-saida"></span></td>
+            </tr>
+            <tr>
+                <td style="padding: 4px;" colspan="2"><strong>Tempo de Garantia:</strong> <span id="pdf-garantia"></span></td>
+            </tr>
+        </table>
+
+        <div style="margin-bottom: 15px;">
+            <strong>Defeito / Relato:</strong> 
+            <p id="pdf-defeito" style="margin: 3px 0; background: #f9f9f9; padding: 6px; border: 1px solid #eee;"></p>
+            
+            <strong>Serviço a Realizar / Obs:</strong> 
+            <p id="pdf-servico" style="margin: 3px 0; background: #f9f9f9; padding: 6px; border: 1px solid #eee;"></p>
+            
+            <strong>Situação:</strong> <span id="pdf-situacao"></span>
+        </div>
+
+        <h4 style="margin-bottom: 5px; border-bottom: 1px solid #ccc; padding-bottom: 3px;">Peças / Componentes</h4>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
+            <thead>
+                <tr style="background: #eee;">
+                    <th style="border: 1px solid #ddd; padding: 6px; text-align: left;">Descrição</th>
+                    <th style="border: 1px solid #ddd; padding: 6px; text-align: center;">Qtd</th>
+                    <th style="border: 1px solid #ddd; padding: 6px; text-align: right;">Unitário</th>
+                    <th style="border: 1px solid #ddd; padding: 6px; text-align: right;">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="pdf-tabela-pecas">
+                <!-- As peças entram aqui via JS -->
+            </tbody>
+        </table>
+
+        <div style="text-align: right; font-size: 14px; border-top: 1px solid #333; padding-top: 10px;">
+            <p style="margin: 3px 0;"><strong>Mão de Obra:</strong> R$ <span id="pdf-mao-obra">0.00</span></p>
+            <p style="margin: 3px 0; font-size: 16px;"><strong>VALOR TOTAL ESTIMADO:</strong> R$ <span id="pdf-total">0.00</span></p>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="mt-auto py-3">
+        <div class="container text-center">
+            <span>Copyright © Geison Rocha - ROCHA SOLIDEZ - ORDENS DE SERVIÇOS 🧰</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

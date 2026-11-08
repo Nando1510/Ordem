@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar / Editar Ordem de Serviço</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Biblioteca html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="visualizar_OS.css">
+</head>
+<body class="bg-light">
+
+    <div class="container py-4" style="max-width: 800px;">
+        <!-- Cabeçalho de Navegação / Voltar (Fora do card do PDF) -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0 text-primary fw-bold">Gerenciamento de OS</h4>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="window.history.back()">← Voltar</button>
+        </div>
+
+        <!-- Formulário / Card que é capturado para gerar o PDF -->
+        <div class="card shadow-sm border-0 p-4 bg-white">
+            <form id="form-os">
+                
+                <!-- TOPO DO PDF: Número da Ordem de Serviço ajustado à esquerda junto com o título -->
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <h5 class="mb-0 text-primary fw-bold">Orçamento / Ordem de Serviço N.º <span id="numeroOS">---</span></h5>
+                </div>
+
+                <!-- Cabeçalho da Empresa -->
+                <div style="text-align: center; border-bottom: 2px solid #0d6efd; padding-bottom: 15px; margin-bottom: 20px;">
+                    <h2 style="margin: 0; color: #0d6efd; font-weight: bold;">ROCHA SOLIDEZ</h2>
+                    <p style="margin: 5px 0 0; font-size: 14px; color: #555;">Assistência Técnica e Serviços</p>
+                </div>
+
+                <!-- Cliente e Dados de Contato -->
+                <div class="row mb-3 font-size-sm border p-2 bg-light rounded">
+                    <div class="col-md-6 mb-1">
+                        <strong>Cliente:</strong> <span id="lbl-cliente">---</span>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <strong>CPF/CNPJ:</strong> <span id="lbl-cpf">---</span>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Cidade:</strong> <span id="lbl-cidade">---</span>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Celular:</strong> <span id="lbl-celular">---</span>
+                    </div>
+                </div>
+
+                <!-- Tabela de Dados Principais -->
+                <table class="table table-bordered mb-3" style="font-size: 14px;">
+                    <tr>
+                        <td style="background: #f8f9fa; width: 18%;"><strong>Equipamento:</strong></td>
+                        <td style="width: 32%;">
+                            <input type="text" id="equipamento" class="form-control form-control-sm border-0 bg-transparent p-0 fw-semibold" required>
+                        </td>
+                        <td style="background: #f8f9fa; width: 18%;"><strong>Marca/Modelo:</strong></td>
+                        <td style="width: 32%;">
+                            <input type="text" id="marcaModelo" class="form-control form-control-sm border-0 bg-transparent p-0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background: #f8f9fa;"><strong>Nº de Série:</strong></td>
+                        <td><span id="lbl-serie">---</span></td>
+                        <td style="background: #f8f9fa;"><strong>Patrimônio:</strong></td>
+                        <td><span id="lbl-patrimonio">---</span></td>
+                    </tr>
+                    <tr>
+                        <td style="background: #f8f9fa;"><strong>Data Entrada:</strong></td>
+                        <td><span id="lbl-data-entrada">---</span></td>
+                        <td style="background: #f8f9fa;"><strong>Previsão Saída:</strong></td>
+                        <td><span id="lbl-data-saida">---</span></td>
+                    </tr>
+                    <tr>
+                        <td style="background: #f8f9fa;"><strong>Garantia:</strong></td>
+                        <td><span id="lbl-garantia">---</span></td>
+                        <td style="background: #f8f9fa;"><strong>Situação:</strong></td>
+                        <td>
+                            <select id="situacao" class="form-select form-select-sm py-0">
+                                <option value="Em andamento">Em andamento</option>
+                                <option value="Aguardando peça">Aguardando peça</option>
+                                <option value="Aprovado">Aprovado</option>
+                                <option value="Concluído">Concluído</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Garantias Específicas -->
+                    <tr>
+                        <td style="background: #f8f9fa;"><strong>Garantia Serv. Anterior:</strong></td>
+                        <td><span id="lbl-garantia-servico-anterior">Não</span></td>
+                        <td style="background: #f8f9fa;"><strong>Garantia Compra/Fábrica:</strong></td>
+                        <td><span id="lbl-garantia-compra">Não</span></td>
+                    </tr>
+                </table>
+
+                <!-- Defeito Reclamado -->
+                <div class="mb-3">
+                    <label class="fw-bold mb-1" style="font-size: 13px;">Defeito Reclamado:</label>
+                    <textarea id="defeito" class="form-control form-control-sm" rows="2"></textarea>
+                </div>
+
+                <!-- Serviço Realizado / Laudo -->
+                <div class="mb-3">
+                    <label class="fw-bold mb-1" style="font-size: 13px;">Serviço Realizado / Laudo:</label>
+                    <textarea id="servicoRealizar" class="form-control form-control-sm" rows="3"></textarea>
+                </div>
+
+                <!-- Tabela de Peças -->
+                <div class="mb-3">
+                    <label class="fw-bold mb-1" style="font-size: 13px;">Peças / Componentes Utilizados:</label>
+                    <table class="table table-bordered table-sm text-center mb-0" style="font-size: 13px;">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="text-start">Descrição</th>
+                                <th>Qtd</th>
+                                <th class="text-end">Vlr. Unit</th>
+                                <th class="text-end">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pdf-tabela-pecas">
+                            <tr>
+                                <td colspan="4" class="text-muted">Nenhuma peça informada.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Rodapé de Valores -->
+                <div class="text-end mb-4" style="font-size: 14px;">
+                    <p class="mb-1">Mão de Obra: R$ <span id="lbl-mao-obra">0.00</span></p>
+                    <div class="d-flex justify-content-end align-items-center gap-2">
+                        <span class="fw-bold fs-6">VALOR TOTAL (R$):</span>
+                        <input type="number" step="0.01" id="valorTotal" class="form-control form-control-sm text-end fw-bold text-primary fs-5 w-25" placeholder="0.00">
+                    </div>
+                </div>
+
+                <hr class="my-3">
+
+                <!-- Botões de Ação -->
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-secondary px-4" onclick="window.history.back()">Cancelar</button>
+                    <button type="button" class="btn btn-danger px-4" id="btnGerarPdf">📄 Gerar PDF</button>
+                    <button id="btnEnviarOrcamento" class="btn btn-primary">
+                            <i class="fab fa-whatsapp"></i> Enviar Orçamento
+                    </button>
+                    <button type="submit" class="btn btn-success px-4" id="btnSalvar">Salvar Alterações</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="visualizar_OS.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/records.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="cadastro_Administrador.js" defer></script>
+    <title>CRUD</title>
+</head>
+<body class="cadastro-administrador" >
+    <header>
+        <h1 class="header-title">Cadastro de Administradores</h1>
+    </header>
+    <main>
+        <button type="button" class="button blue mobile" id="cadastrarAdministrador">Cadastrar Administrador</button>
+        <table class="records">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Senha</th>
+                    <th>Celular</th>
+                    <th>Criado em</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+                
+            </tbody>
+        </table>
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h2>Novo Funcionário</h2>
+                    <span class="modal-close" id="modalClose" onclick="fechar_Modal()">&#10006;</span>
+                </header>
+                <form class="modal-form" id="formulario_Modal">
+                    <input type="text"  class="modal-field"  id="nome"    placeholder="Digite seu  login">
+                    <input type="password" class="modal-field " id="senha"   placeholder="Digite sua senha">
+                    <input type="password"  class="modal-field"  id="confirmar_Senha" placeholder="Confirme sua senha">
+                    <input type="number"  class="modal-field"  id="celular" placeholder="celular">
+                </form> 
+                <footer class="modal-footer">
+                    <button class="button green" id="salvar">Salvar</button>
+                    <button class="button blue"  id="cancelar" >Cancelar</button>
+                </footer>
+            </div>
+        </div>
+
+    <script>
+      async function carregarDados() {
+        try {
+          const resposta = await fetch('/registros_Administrador');
+          const dados = await resposta.json();
+          const corpo = document.getElementById('corpo-tabela');
+          corpo.innerHTML = '';
+
+          dados.forEach(item => {
+            const tr = document.createElement('tr');
+            const criadoEm = new Date(item.createdAt).toLocaleString('pt-BR');
+            tr.innerHTML = `
+              <td>${item.customId}</td>
+              <td>${item.nome}</td>
+              <td>${item.senha}</td>
+              <td>${item.celular}</td>
+              <td>${criadoEm}</td>
+              <td>
+                <span class="icon" onclick="iniciarEdicao(this, ${item.customId})">✏️</span>
+                <span class="icon" onclick="excluirRegistro(${item.customId})">🗑️</span>
+              </td>
+            `;
+            corpo.appendChild(tr);
+          });
+        } catch (err) {
+          console.error('Erro ao carregar dados:', err);
+        }
+    }
+
+    function iniciarEdicao(el, id) {
+      const tr = el.closest('tr');
+      const cells = tr.querySelectorAll('td');
+      ['nome', 'senha', 'celular'].forEach((field, idx) => {
+        const td = cells[idx + 1];
+        const valor = td.textContent;
+        td.innerHTML = `<input class="edit-field" id="edit-${field}-${id}" value="${valor}">`;
+      });
+      el.textContent = '💾';
+      el.onclick = () => salvarEdicao(id);
+    }
+
+    async function salvarEdicao(id) {
+      const nome = document.getElementById(`edit-nome-${id}`).value.trim();
+      const senha = document.getElementById(`edit-senha-${id}`).value.trim();
+      const celular = document.getElementById(`edit-celular-${id}`).value.trim();
+      
+      
+      // Enviar para o backend
+      const res = await fetch(`/atualizar_Administrador/${id}`, {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ nome, senha, celular})  // inclui resultado
+      });
+
+      if (res.ok) carregarDados();
+      else alert('Erro ao salvar edição');
+
+    }
+
+    async function excluirRegistro(id) {
+      if (!confirm('Deseja realmente excluir este registro?')) return;
+      const res = await fetch(`/excluir_Administrador/${id}`, { method: 'DELETE' });
+      if (res.ok) carregarDados();
+      else alert('Erro ao excluir registro');
+    }
+
+    carregarDados();
+    </script>
+    </main>
+    <footer>
+        Copyright &copy; Fernando - TCC CIÊNCIAS DA COMPUTAÇÃO - UNILASALLE
+    </footer>
+</body>
+</html>

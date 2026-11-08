@@ -1,0 +1,297 @@
+/* ================= ==========================================
+   ESTILOS GERAIS E LAYOUT
+   ========================================================== */
+body {
+    background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
+    color: white;
+    min-height: 100vh;
+    padding-bottom: 60px;
+    font-family: 'Karla', sans-serif;
+    margin: 0;
+}
+
+/* Cabeçalho e Usuário */
+.cabecalho {
+    padding: 20px 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+#nome_Administrador {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+/* Container Principal */
+.conteudo-principal {
+    display: flex;
+    justify-content: center;
+    padding: 20px 15px;
+}
+
+.container-cadastro {
+    background-color: #f8f9fa;
+    color: #333;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.container-cadastro h2 {
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #0f172a;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 10px;
+}
+
+/* ================= ==========================================
+   SEÇÃO DE PESQUISA E DROPDOWN
+   ========================================================== */
+.secao-pesquisa {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.secao-pesquisa label {
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.input-com-seta {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-com-seta input {
+    width: 100%;
+    padding: 10px 35px 10px 12px;
+    border: 1px solid #a5d6a7;
+    border-radius: 4px;
+    outline: none;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.input-com-seta input:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 4px rgba(46, 125, 50, 0.3);
+}
+
+.seta-dropdown {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    color: #6c757d;
+    user-select: none;
+    font-size: 0.8rem;
+}
+
+/* Lista Suspensa (Dropdown) */
+.dropdown-lista {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.dropdown-lista li {
+    padding: 10px 12px;
+    cursor: pointer;
+    color: #333;
+    font-size: 0.95rem;
+    transition: background 0.1s;
+    text-align: left;
+}
+
+.dropdown-lista li:hover {
+    background-color: #0d6efd;
+    color: white !important;
+}
+
+/* ================= ==========================================
+   FORMULÁRIO E CAMPOS
+   ========================================================== */
+.opcao-novo-produto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    background-color: #e8f5e9;
+    padding: 10px 14px;
+    border-radius: 4px;
+    border-left: 4px solid #2e7d32;
+}
+
+.opcao-novo-produto label {
+    font-weight: bold;
+    color: #1b5e20;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.campo-grupo label {
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.campo-grupo input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #a5d6a7;
+    border-radius: 4px;
+    outline: none;
+    font-size: 0.95rem;
+    background-color: #ffffff;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.campo-grupo input:focus:not(:disabled) {
+    border-color: #2e7d32;
+    box-shadow: 0 0 4px rgba(46, 125, 50, 0.3);
+}
+
+/* Estados de Campos Desabilitados / Somente Leitura */
+input:disabled,
+.form-control-readonly {
+    background-color: #e9ecef !important;
+    color: #495057 !important;
+    border-color: #ced4da !important;
+    cursor: not-allowed;
+}
+
+/* Layouts em Linha (Grid) */
+.linha-dupla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.linha-tripla {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+/* ================= ==========================================
+   BOTÕES E AÇÕES
+   ========================================================== */
+.acoes-formulario {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+    gap: 15px;
+}
+
+.btn-custom {
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.btn-custom:active {
+    transform: scale(0.98);
+}
+
+/* Botão de Adicionar (Verde) */
+.btn-add {
+    background-color: #198754;
+    color: white;
+}
+
+.btn-add:hover {
+    background-color: #157347;
+}
+
+/* Botão de Atualizar (Azul) */
+.btn-update {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn-update:hover {
+    background-color: #0b5ed7;
+}
+
+/* Botão Voltar */
+#voltar {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 24px; /* OK  */
+    border-radius: 4px; /* OK  */
+    border: none; /* OK  */
+    cursor: pointer; /* OK  */
+    font-weight: bold; /* OK  */
+    transition: background 0.2s; /* OK  */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#voltar:hover {
+    background-color: #5c636a;
+}
+
+/* ================= ==========================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================================== */
+@media (max-width: 650px) {
+    .linha-dupla,
+    .linha-tripla {
+        grid-template-columns: 1fr;
+    }
+
+    .cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .container-cadastro {
+        padding: 20px;
+    }
+}

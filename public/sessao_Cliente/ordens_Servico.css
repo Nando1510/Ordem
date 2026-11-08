@@ -1,0 +1,112 @@
+body {
+    background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    padding-bottom: 60px;
+    font-family: 'Karla', sans-serif;
+}
+
+.navbar-text {
+   color: white !important;
+   font-weight: bold;
+}
+
+.box-search {
+    display: flex;
+    justify-content: center;
+    gap: 0.1%;
+    margin-bottom: 20px;
+}
+
+table.records {
+    width: 85%;
+    margin: 0 auto 40px auto;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+table.records thead {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+table.records th,
+table.records td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: white;
+}
+
+table.records th {
+    font-weight: bold;
+}
+
+/* Efeito de Mãozinha / Pointer para o nome do Cliente */
+.cliente-link {
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.cliente-link:hover {
+    color: #38bdf8;
+    text-decoration: underline;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+    margin: 0 4px;
+}
+
+.icon:hover {
+    color: #0d6efd;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(17, 54, 71);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    font-family: 'Karla', sans-serif;
+}
+
+/* --- Estilização do Botão Cadastrar/Gerar OS --- */
+.button.blue {
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.button.blue:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+.button.blue:active {
+    transform: translateY(0);
+}
+
+#gerar_OS {
+    display: block;        /* Transforma o botão em bloco para aceitar margens */
+    margin-left: 7.5%;     /* Alinha com a borda esquerda da tabela */
+    margin-right: auto;
+    margin-bottom: 20px;
+}

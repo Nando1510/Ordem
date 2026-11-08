@@ -19,6 +19,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// ROTA RAIZ (Página Inicial para evitar o erro Cannot GET /)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html')); 
+  // Nota: Se a sua página principal estiver em outro caminho dentro de 'public', 
+  // ajuste o caminho acima (por exemplo: 'public', 'login.html', etc.)
+});
+
 // CONFIGURAÇÃO DA SESSÃO
 app.use(session({
   secret: 'seuSegredoUltraSecreto', // Recomenda-se usar variável de ambiente (process.env.SESSION_SECRET)
@@ -621,4 +628,3 @@ mongoose.connect(mongoURI)
   .catch(err => {
     console.error('Erro ao conectar ao MongoDB:', err);
   });
-

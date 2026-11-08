@@ -37,11 +37,7 @@ async function gerarCustomId(Model) {
   return ultima && ultima.customId ? ultima.customId + 1 : 1;
 }
 
-// INICIALIZAÇÃO DO SERVIDOR
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+
 
 
 // ==========================================
@@ -610,3 +606,19 @@ app.put('/atualizar_os/:id', async (req, res) => {
     res.status(500).json({ mensagem: 'Erro ao atualizar Ordem de Serviço.' });
   }
 });
+
+
+// INICIA O SERVIDOR APÓS GARANTIR A CONEXÃO COM O MONGODB
+const PORT = process.env.PORT || 3000;
+
+mongoose.connect(mongoURI)
+  .then(() => {
+    console.log('MongoDB Atlas conectado com sucesso!');
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error('Erro ao conectar ao MongoDB:', err);
+  });
+
